@@ -1,22 +1,11 @@
 <?php
 
-class vaga {
-	private $id;
+class vaga extends abstractEntidade {
 	private $numero;
 
     public function __construct($id,$numero) {
-		$this->setId($id);
+		parent::__construct($id);
         $this->setNumero($numero);
-	}
-
-	public function setId($id) {
-		if ($id >= 0) {
-			$this->id = $id;
-		}
-	}
-
-	public function getId() {
-		return $this->id;
 	}
 
 	public function setNumero($numero) {
@@ -30,10 +19,10 @@ class vaga {
 	}
 
 	public function __toString() {
-		return "[Vaga] Id: ".$this->id." | ".
-		"Número: ".$this->numero;
+		return "[Vaga] Parent: ".parent::__toString()." | ".
+		"Número: ".$this->numero." | ";
 	}
-
+	
 }
 
 ?>

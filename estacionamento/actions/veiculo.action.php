@@ -22,41 +22,41 @@
         $dados = dadosForm();
         
         $pdo = Conexao::getInstance();
-        $stmt = $pdo->prepare('INSERT INTO vaga (numero) VALUES(:numero)');
-        $stmt->bindParam(':numero', $numero, PDO::PARAM_STR);
-        $numero = $dados['numero'];
+        $stmt = $pdo->prepare('INSERT INTO veiculo (placa) VALUES(:placa)');
+        $stmt->bindParam(':placa', $placa, PDO::PARAM_STR);
+        $placa = $dados['placa'];
         $stmt->execute();
-        header("location:../index.php?selectedClass=vaga");
+        header("location:../index.php?selectedClass=veiculo");
     }
 
     function editar($id){
         $dados = dadosForm();
 
         $pdo = Conexao::getInstance();
-        $stmt = $pdo->prepare('UPDATE vaga SET numero = :numero WHERE id = :id');
-        $stmt->bindParam(':numero', $numero, PDO::PARAM_STR);
+        $stmt = $pdo->prepare('UPDATE veiculo SET placa = :placa WHERE id = :id');
+        $stmt->bindParam(':placa', $placa, PDO::PARAM_STR);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $numero = $dados['numero'];
+        $placa = $dados['placa'];
         $id = $dados['id'];
         $stmt->execute();
-        header("location:../index.php?selectedClass=vaga");
+        header("location:../index.php?selectedClass=veiculo");
     }
 
     function excluir($id){
         $pdo = Conexao::getInstance();
-        $stmt = $pdo->prepare('DELETE from vaga WHERE id = :id');
+        $stmt = $pdo->prepare('DELETE from veiculo WHERE id = :id');
         $stmt->bindParam(':id', $idD, PDO::PARAM_INT);
         $idD = $id;
         $stmt->execute();
-        header("location:../index.php?selectedClass=vaga");
+        header("location:../index.php?selectedClass=veiculo");
     }
 
     function buscarDados($id){
         $pdo = Conexao::getInstance();
-        $consulta = $pdo->query("SELECT * FROM vaga WHERE id = $id");
+        $consulta = $pdo->query("SELECT * FROM veiculo WHERE id = $id");
         $dados = array();
         while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-            $dados['numero'] = $linha['numero'];
+            $dados['placa'] = $linha['placa'];
         }
         return $dados;
     }
@@ -64,7 +64,7 @@
     function dadosForm(){
         $dados = array();
         $dados['id'] = $_POST['id'];
-        $dados['numero'] = $_POST['numero'];
+        $dados['placa'] = $_POST['placa'];
         return $dados;
     }
 

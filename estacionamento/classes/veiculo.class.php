@@ -1,22 +1,11 @@
 <?php
 
-class veiculo {
-	private $id;
+class veiculo extends abstractEntidade {
 	private $placa;
 
     public function __construct($id,$placa) {
-		$this->setId($id);
+		parent::__construct($id);
         $this->setPlaca($placa);
-	}
-
-	public function setId($id) {
-		if ($id >= 0) {
-			$this->id = $id;
-		}
-	}
-
-	public function getId() {
-		return $this->id;
 	}
 
 	public function setPlaca($placa) {
@@ -30,8 +19,8 @@ class veiculo {
 	}
 
 	public function __toString() {
-		return "[Veículo] Id: ".$this->id." | ".
-		"Placa: ".$this->placa;
+		return "[Veículo] Parent: ".parent::__toString()." | ".
+		"Placa: ".$this->placa." | ";
 	}
 
 }

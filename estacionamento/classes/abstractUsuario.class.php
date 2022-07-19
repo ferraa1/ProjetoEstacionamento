@@ -31,7 +31,7 @@ class abstractUsuario extends abstractEntidade {
     }
   
     public function getUsuario() {
-      $this->x = $usuario;
+      return $this->usuario;
     }
   
     public function setSenha($senha) {
@@ -41,19 +41,27 @@ class abstractUsuario extends abstractEntidade {
     }
   
     public function getSenha() {
-      $this->x = $senha;
+      return $this->senha;
     }
   
     public function setAtivado($ativado) {
-      if ($ativado == true || $ativado == false) {
+      if (is_bool($ativado) || $ativado == 1 || $ativado == 0) {
         $this->ativado = $ativado;
       }
     }
   
     public function getAtivado() {
-      $this->x = $ativado;
+      return $this->ativado;
     }
   
+    public function __toString() {
+      return "[abstractUsuario] Parent: ".parent::__toString()." | ".
+      "Nome: ".$this->nome." | ".
+      "Usuário: ".$this->usuario." | ".
+      "Senha: ".$this->senha." | ".
+      "Ativado: ".$this->ativado." | ";
+    }
+
 }
 
 ?>

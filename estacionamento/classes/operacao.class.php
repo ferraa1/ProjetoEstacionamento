@@ -1,34 +1,21 @@
 <?php
 
-class operacao {
-	private $id;
+class operacao extends abstractEntidade {
     private $dataEntrada;
     private $dataSaida;
-    private $codigo;
     private $funcionario;
     private $vaga;
     private $precoHora;
     private $veiculo;
 
-    public function __construct($id,$dataEntrada,$dataSaida,$codigo,$funcionario,$vaga,$precoHora,$veiculo) {
-		$this->setId($id);
+    public function __construct($id,$dataEntrada,$dataSaida,$funcionario,$vaga,$precoHora,$veiculo) {
+		parent::__construct($id);
         $this->setDataEntrada($dataEntrada);
         $this->setDataSaida($dataSaida);
-        $this->setCodigo($codigo);
         $this->setFuncionario($funcionario);
         $this->setVaga($vaga);
         $this->setPrecoHora($precoHora);
         $this->setVeiculo($veiculo);
-	}
-
-	public function setId($id) {
-		if ($id >= 0) {
-			$this->id = $id;
-		}
-	}
-
-	public function getId() {
-		return $this->id;
 	}
 
     public function setDataEntrada($dataEntrada) {
@@ -37,7 +24,7 @@ class operacao {
         }
     }
 
-    public function getDataEntrada($dataEntrada) {
+    public function getDataEntrada() {
         return $this->dataEntrada;
     }
 
@@ -47,70 +34,71 @@ class operacao {
         }
     }
 
-    public function getDataSaida($dataSaida) {
+    public function getDataSaida() {
         return $this->dataSaida;
     }
 
-    public function setCodigo($codigo) {
-        if (strlen($codigo) > 0) {
-            $this->codigo = $codigo;
-        }
-    }
-
-    public function getCodigo($codigo) {
-        return $this->codigo;
-    }
-
     public function setFuncionario($funcionario) {
-        if ($funcionario > 0) {
+        if ($funcionario != null) {
             $this->funcionario = $funcionario;
         }
     }
 
-    public function getFuncionario($funcionario) {
+    public function getFuncionario() {
         return $this->funcionario;
     }
 
     public function setVaga($vaga) {
-        if ($vaga > 0) {
+        if ($vaga != null) {
             $this->vaga = $vaga;
         }
     }
 
-    public function getVaga($vaga) {
+    public function getVaga() {
         return $this->vaga;
     }
 
     public function setPrecoHora($precoHora) {
-        if ($precoHora > 0) {
+        if ($precoHora != null) {
             $this->precoHora = $precoHora;
         }
     }
 
-    public function getPrecoHora($precoHora) {
-        return $this->xyz;
+    public function getPrecoHora() {
+        return $this->precoHora;
     }
 
     public function setVeiculo($veiculo) {
-        if ($veiculo > 0) {
+        if ($veiculo != null) {
             $this->veiculo = $veiculo;
         }
     }
 
-    public function getVeiculo($veiculo) {
+    public function getVeiculo() {
         return $this->veiculo;
     }
 
 	public function __toString() {
-		return "[Operação] Id: ".$this->id." | ".
+		return "[Operação] Parent: ".parent::__toString()." | ".
 		"Data de Entrada: ".$this->dataEntrada." | ".
         "Data de Saída: ".$this->dataSaida." | ".
-        "Código: ".$this->codigo." | ".
-        "Funcionário: ".$this->funcionario." | ".
-        "Vaga: ".$this->vaga." | ".
-        "Preço/Hora: ".$this->precoHora." | ".
-        "Veículo: ".$this->veiculo;
+        "Funcionário: ".$this->funcionario->__toString()." | ".
+        "Vaga: ".$this->vaga->__toString()." | ".
+        "Preço/Hora: ".$this->precoHora->__toString()." | ".
+        "Veículo: ".$this->veiculo->__toString()." | ";
 	}
+
+    public function calcHoras() {
+        if ($this->dataSaida == null) {
+            return abs(strtotime(date('Y-m-d H:i:s')) - strtotime($this->dataEntrada))/(60*60);
+        } else {
+            return abs(strtotime($this->dataSaida) - strtotime($this->dataEntrada))/(60*60);
+        }
+    }
+
+    public function calcPreco() {
+        return $this->calcHoras() * $this->precoHora->getPreco();
+    }
 
 }
 

@@ -1,24 +1,13 @@
 <?php
 
-class precoHora {
-	private $id;
+class precoHora extends abstractEntidade {
 	private $preco;
 	private $atualizado;
 
     public function __construct($id,$preco,$atualizado) {
-		$this->setId($id);
+		parent::__construct($id);
         $this->setPreco($preco);
 		$this->setAtualizado($atualizado);
-	}
-
-	public function setId($id) {
-		if ($id >= 0) {
-			$this->id = $id;
-		}
-	}
-
-	public function getId() {
-		return $this->id;
 	}
 
 	public function setPreco($preco) {
@@ -42,9 +31,9 @@ class precoHora {
 	}
 
 	public function __toString() {
-		return "[Preço/Hora] Id: ".$this->id." | ".
+		return "[Preço/Hora] Parent: ".parent::__toString()." | ".
 		"Preço: ".$this->preco." | ".
-		"Atualizado: ".$this->atualizado;
+		"Atualizado: ".$this->atualizado." | ";
 	}
 
 }

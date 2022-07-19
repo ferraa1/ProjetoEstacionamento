@@ -1,63 +1,16 @@
 <?php
 
-class cliente {
-	private $id;
-	private $nome;
-    private $usuario;
-    private $senha;
+class cliente extends abstractUsuario {
     private $email;
     private $telefone;
-    private $ativado;
+    private $veiculos;
 
-    public function __construct($id,$nome,$usuario,$senha,$email,$telefone,$ativado) {
-		$this->setId($id);
-        $this->setNome($nome);
-        $this->setUsuario($usuario);
-        $this->setSenha($senha);
+    public function __construct($id,$nome,$usuario,$senha,$ativado,$email,$telefone,$veiculos) {
+        parent::__construct($id,$nome,$usuario,$senha,$ativado);
         $this->setEmail($email);
         $this->setTelefone($telefone);
-        $this->setAtivado($ativado);
+        $this->setVeiculos($veiculos);
 	}
-
-	public function setId($id) {
-		if ($id >= 0) {
-			$this->id = $id;
-		}
-	}
-
-	public function getId() {
-		return $this->id;
-	}
-
-	public function setNome($nome) {
-		if (strlen($nome) > 0) {
-			$this->nome = $nome;
-		}
-	}
-
-	public function getNome() {
-		return $this->nome;
-	}
-
-    public function setUsuario($usuario) {
-        if (strlen($usuario) > 0) {
-			$this->usuario = $usuario;
-		}
-    }
-
-    public function getUsuario() {
-        $this->x = $usuario;
-    }
-
-    public function setSenha($senha) {
-        if (strlen($senha) > 0) {
-			$this->senha = $senha;
-		}
-    }
-
-    public function getSenha() {
-        $this->x = $senha;
-    }
 
     public function setEmail($email) {
         if (strlen($email) > 0) {
@@ -66,7 +19,7 @@ class cliente {
     }
 
     public function getEmail() {
-        $this->x = $email;
+        return $this->email;
     }
 
     public function setTelefone($telefone) {
@@ -76,27 +29,23 @@ class cliente {
     }
 
     public function getTelefone() {
-        $this->x = $telefone;
+        return $this->telefone;
     }
 
-    public function setAtivado($ativado) {
-        if ($ativado == true || $ativado == false) {
-			$this->ativado = $ativado;
+    public function setVeiculos($veiculo) {
+        if (is_array($veiculo)) {
+			$this->veiculo = $veiculo;
 		}
     }
 
-    public function getAtivado() {
-        $this->x = $ativado;
+    public function getVeiculos() {
+        return $this->veiculo;
     }
 
 	public function __toString() {
-		return "[Cliente] Id: ".$this->id." | ".
-		"Nome: ".$this->nome." | ".
-        "Usuário: ".$this->usuario." | ".
-        "Senha: ".$this->senha." | ".
+		return "[Cliente] Parent: ".parent::__toString()." | ".
         "Email: ".$this->email." | ".
-        "Telefone: ".$this->telefone." | ".
-        "Ativado: ".$this->ativado." | ";
+        "Telefone: ".$this->telefone." | ";
 	}
 
 }

@@ -3,7 +3,7 @@
 class abstractEntidade {
     private $id;
 
-    public function __construct($id) {
+    public function __construct($id = null) {
 		$this->setId($id);
 	}
 
@@ -16,7 +16,11 @@ class abstractEntidade {
 	public function getId() {
 		return $this->id;
 	}
-    
+
+	public function __toString() {
+		return "[abstractEntidade] Id: ".$this->id." | ";
+	}
+	
 }
 
 ?>
